@@ -50,13 +50,6 @@
         "description": "URL of the KeyEncryptionKey used to encrypt the volume encryption key"
       }
     },
-    "volumeType": {
-      "type": "string",
-      "defaultValue": "All",
-      "metadata": {
-        "description": "Type of the volume OS or Data to perform encryption operation"
-      }
-    },
     "sequenceVersion": {
       "type": "string",
       "defaultValue": "1.0",
@@ -69,8 +62,7 @@
     "extensionName": "AzureDiskEncryption",
     "extensionVersion": "1.1",
     "encryptionOperation": "EnableEncryption",
-    "keyEncryptionAlgorithm": "RSA-OAEP",
-    "updateVmUrl": "[concat('https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-encrypt-running-windows-vm/updatevm-',parameters('useExistingKek'),'.json')]",
+    "updateVmUrl": "https://raw.githubusercontent.com/BenScopato/ArmTemplates/master/update-vm-nokek.json",
     "keyVaultURL": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/')]",
     "keyVaultResourceID": "[concat(subscription().id,'/resourceGroups/',parameters('keyVaultResourceGroup'),'/providers/Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
   },
@@ -90,9 +82,11 @@
           "AADClientID": "[parameters('aadClientID')]",
           "KeyVaultURL": "[variables('keyVaultURL')]",
           "KeyEncryptionKeyURL": "[parameters('keyEncryptionKeyURL')]",
-          "KeyEncryptionAlgorithm": "[variables('keyEncryptionAlgorithm')]",
-          "VolumeType": "[parameters('volumeType')]",
-          "EncryptionOperation": "[variables('encryptionOperation')]"
+          "EncryptionOperation": "[variables('encryptionOperation')]",
+          "SequenceVersion": "",
+          "AADClientCertThumbprint": "",
+          "VolumeType": "",
+          "KeyEncryptionAlgorithm": ""
         },
         "protectedSettings": {
           "AADClientSecret": "[parameters('aadClientSecret')]"
